@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container{
+            width: 200px;
+            height: 600px;
+            overflow: scroll;            /* 超出滚动 hidden 是超出隐藏 */
+            border: 1px solid black;
+        }
+        .target{
+            margin-top: 900px;
+            width: 100px;
+            height: 100px;
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="target">
+
+        </div>
+    </div>
+    <script>
+        const target = document.querySelector('.target');
+        let observer = new IntersectionObserver(function(nodes){
+            nodes.forEach(function(node){
+                // console.log(node);
+                if(node.isIntersecting){
+                    console.log('已经出现了');
+                }
+            })
+        },{
+            root: document.querySelector('.container'),
+            rootMargin:'0px 0px 100px 0px',                 // 距离根元素的上右下左的距离
+            // threshold:[0.5,1]               // 每阈值超过一个阈值就提醒一下
+        })
+        //开始观察
+        //如果出现在视窗范围之内，他就会通知我
+        observer.observe(target);
+    </script>
+</body>
+</html>
